@@ -1,9 +1,10 @@
 const mongoose = require("mongoose")
 
-const db  = mongoose.connect("mongodb://localhost/chat-app",{
+mongoose.connect("mongodb://localhost/chat-app",{
         useNewUrlParser: true ,
         useUnifiedTopology: true , 
         useCreateIndex : true 
 })
 
-module.exports = db;
+module.exports.User = require("./models/Users")
+module.exports.Messages = require("./models/Messages")

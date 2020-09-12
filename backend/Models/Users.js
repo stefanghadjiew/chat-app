@@ -1,5 +1,6 @@
-const mongoose = require(`mongoose`)
+const mongoose = require("mongoose")
 const bcrypt = require("bcrypt");
+const Messages = require("./Messages")
 
 const userSchema = new mongoose.Schema({
     username : {
@@ -34,6 +35,15 @@ userSchema.pre("save",async function(next) {
         return next(err);
     }
 })
+
+userSchema.methods.comparePassword = async function(userPassword,next){
+    try {
+        let isMatch = await bcrypt.compareSync(userPassword,this.password)
+        return isMatch;
+    } catch(err) {
+        return next(err);
+    }
+}
 
 const User = mongoose.model("User",userSchema);
 module.exports = User;
