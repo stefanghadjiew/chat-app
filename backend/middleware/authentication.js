@@ -61,3 +61,34 @@ exports.login = async (req,res,next) => {
         })
     }
 }
+
+exports.isUserAuthenticated = (req,res,next) => {
+    const jwtPayload = req.headers.authorization.split(" ")[1]
+    jwt.verify(jwtPayload,"thisShouldBeProcessEnvSecretKeyButImLazy",(err,decoded) => {
+        if(decoded) {
+            return next();
+        }
+        if (err) {
+            return next({
+                status : 401,
+                message : "Please log in first!"
+            })
+        }
+    })
+
+} 
+
+exports.isUserAuthorized = (req,res,next) => {
+    const jwtPayload = req.headers.authorization.split(" ")[1]
+    jwt.verify(jwtPayload,"thisShouldBeProcessEnvSecretKeyButImLazy",(err,decoded) => {
+        if(decoded && decoded.id === req.params.id) {
+            return next()
+        }
+        if(err) {
+            return next({
+                status : 401,
+                message : "Unauthorized !!!"
+            })
+        }
+    })
+}

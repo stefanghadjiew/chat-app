@@ -1,13 +1,18 @@
 const express = require("express");
 const app = express();
 const PORT = 3001;
-const errorHandler = require("./errorHandler")
-const authRoutes = require("./authRoutes")
+const errorHandler = require("./errorHandler");
+const authRoutes = require("./authRoutes");
+const messagesRoutes = require("./messagesRoutes");
+const { isUserAuthenticated,isUserAuthorized  } = require("./middleware/authentication");
 
 app.use(express.json());
 
-app.use("/api/auth",authRoutes)
-app.use("/api/user/:id/messages",messagesRoutes)
+app.use("/api/auth",authRoutes);
+app.use("/api/user/:id/messages",
+isUserAuthenticated,
+isUserAuthorized,
+messagesRoutes);
 
 app.use(errorHandler);
 

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const User = require("./Users")
+const User = require("./Users");
 
-const messagesSchema = new mongoose.Schema({
+const messageSchema = new mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
             ref:"User"
@@ -10,10 +10,14 @@ const messagesSchema = new mongoose.Schema({
         type:String,
         required:true,
         maxlength:150
-    }
-})
+    },
+    
+},
+{
+    timestamps:true
+});
 
-messagesSchema.pre("remove",async function (next) {
+messageSchema.pre("remove",async function (next) {
     try{
         let user = await User.findById(this.user);
         user.messages.remove(this.id);
@@ -22,7 +26,7 @@ messagesSchema.pre("remove",async function (next) {
         return next(err)
     }
     
-})
+});
 
-const Messages = mongoose.model("Messages",messagesSchema)
-module.exports = Messages;
+const Message = mongoose.model("Message",messageSchema);
+module.exports = Message;

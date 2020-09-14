@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const Messages = require("./Messages")
+const Message = require("./Message");
 
 const userSchema = new mongoose.Schema({
     username : {
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref: 'Message'
     }]
-})
+});
 
 userSchema.pre("save",async function(next) {
     try{
@@ -34,7 +34,7 @@ userSchema.pre("save",async function(next) {
     } catch (err) {
         return next(err);
     }
-})
+});
 
 userSchema.methods.comparePassword = async function(userPassword,next){
     try {
@@ -43,7 +43,7 @@ userSchema.methods.comparePassword = async function(userPassword,next){
     } catch(err) {
         return next(err);
     }
-}
+};
 
 const User = mongoose.model("User",userSchema);
 module.exports = User;
