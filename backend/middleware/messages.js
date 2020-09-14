@@ -27,8 +27,8 @@ exports.createMessages = async (req,res,next) => {
 
 exports.getMessages = async (req,res,next) => {
     try {
-        let message = await db.Message.findById(req.params.message_id)
-        res.status(200).json(message)
+        let foundMessage = await db.Message.findById(req.params.messages_id)
+        res.status(200).json(foundMessage)
     } catch(err) {
 
     }
