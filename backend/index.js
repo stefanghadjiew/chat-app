@@ -5,8 +5,10 @@ const errorHandler = require("./errorHandler");
 const authRoutes = require("./authRoutes");
 const messagesRoutes = require("./messagesRoutes");
 const { isUserAuthenticated,isUserAuthorized  } = require("./middleware/authentication");
+const cors = require("cors")
 
 app.use(express.json());
+app.use(cors());
 
 app.use("/api/auth",authRoutes);
 app.use("/api/user/:id/messages",
