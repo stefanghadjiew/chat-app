@@ -1,16 +1,15 @@
 import React,{ useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Navbar from "./Navbar"
+import Main from "./Main"
 
 
 function App() {
-  const [user,setUser] = useState({
-    username: "",
-    email: ""
-  })
+  const [isUserLogged,setIsUserLogged] = useState(false)
   return (
     <Router>
-       <Navbar/>
+       <Navbar isUserLogged={isUserLogged}/>
+       <Main isUserLogged={isUserLogged}/>
     </Router>
    );
 }

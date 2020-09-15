@@ -12,11 +12,15 @@ code {
     monospace;
 }
 
+#root {
+  min-height: 100vh;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   height: 60px;
-  background-color: #242526;
+  background-color: #2d3436;
   padding: 0 1rem;
 }
 
@@ -41,3 +45,48 @@ code {
   margin: 0 0.5rem;
 }
 
+
+
+.form-container {
+  height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.MuiFormControl-root {
+  margin-top: 0.5rem !important;
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+}
+
+.user_greeting {
+  width: 40%;
+  background-color: #2d3436;
+}
+
+.user_greeting_inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.user_greeting_inner > h1 {
+  color:#f50057;
+}
+
+.submit {
+  color: #2d3436;
+  font-weight: bold;
+}
