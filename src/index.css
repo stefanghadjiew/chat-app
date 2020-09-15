@@ -16,6 +16,10 @@ code {
   min-height: 100vh;
 }
 
+a {
+  text-decoration: none;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -75,18 +79,39 @@ code {
   background-color: #2d3436;
 }
 
-.user_greeting_inner {
+.user_greeting_register {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
-.user_greeting_inner > h1 {
-  color:#f50057;
+.user_greeting_register > h1 {
+  color:rgb(245, 0, 87);
 }
 
 .submit {
   color: #2d3436;
   font-weight: bold;
 }
+
+.form_container_inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 600px;
+  height:400px;
+  background-image: linear-gradient(to right bottom,rgba(45, 52, 54,0.4),rgba(245, 0, 87,0.5)),url("./images/wallhaven-01py33.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.form_container_inner>h1 {
+  color: #f50057;
+}
+
+.form_container_inner>h3 {
+  color: #fff;
+}
+

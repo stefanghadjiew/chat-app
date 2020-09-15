@@ -5,11 +5,31 @@ import Main from "./Main"
 
 
 function App() {
-  const [isUserLogged,setIsUserLogged] = useState(false)
+  const [isUserLogged,setIsUserLogged] = useState({
+    user: {},
+    isLogged : false,
+    err : {}
+  })
+
+  const logout = () => {
+    setIsUserLogged({
+      user:{},
+      isLogged:false,
+      err:{}
+    })
+  }
+  
+  const userIsLogged = (dataFromAuth,errFromAuth) => {
+    setIsUserLogged({
+      user:dataFromAuth,
+      isLogged:true,
+      err: {errFromAuth}
+    })
+  }
   return (
     <Router>
-       <Navbar isUserLogged={isUserLogged}/>
-       <Main isUserLogged={isUserLogged}/>
+       <Navbar isLogged={isUserLogged.isLogged} logout={logout}/>
+       <Main isLogged={isUserLogged.isLogged} userIsLogged={userIsLogged}/>
     </Router>
    );
 }

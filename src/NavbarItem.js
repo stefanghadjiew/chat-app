@@ -1,11 +1,11 @@
 import React from "react";
-import { VpnKeyRounded,LockOpenRounded  } from "@material-ui/icons"
+import { VpnKeyRounded,LockOpenRounded,HomeRounded,ClearRounded} from "@material-ui/icons"
 import IconButton from "@material-ui/core/IconButton"
 import Tooltip from "@material-ui/core/Tooltip"
 import { Link } from "react-router-dom"; 
 
 
-const NavbarItem = ({btnText}) => {
+const NavbarItem = ({btnText,logout}) => {
     if(btnText === "Login") {
         return (
             <li className="navbar-nav-item">
@@ -29,6 +29,30 @@ const NavbarItem = ({btnText}) => {
                         </IconButton>
                     </Tooltip>
                 </Link>
+            </li>
+        )
+    }
+    if (btnText === "Home") {
+        return (
+            <li className="navbar-nav-item">
+                <Link to="/">
+                    <Tooltip title={btnText}>
+                        <IconButton color="secondary">
+                            <HomeRounded color="secondary"/>
+                        </IconButton>
+                    </Tooltip>
+                </Link>
+            </li>
+        )
+    }
+    if (btnText === "Logout") {
+        return (
+            <li className="navbar-nav-item">
+                <Tooltip title={btnText}>
+                    <IconButton color="secondary" onClick={logout}>
+                        <ClearRounded color="secondary"/>
+                    </IconButton>
+                </Tooltip>
             </li>
         )
     }

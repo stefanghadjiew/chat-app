@@ -1,7 +1,8 @@
-import React , { useReducer } from "react";
+import React , { useState } from "react";
 import TextField from "@material-ui/core/TextField"
-import { MessageRounded } from "@material-ui/icons"
+import { MessageRounded,PeopleAltRounded } from "@material-ui/icons"
 import Button from "@material-ui/core/Button"
+
 
 const initialState = {
     username :"",
@@ -10,32 +11,56 @@ const initialState = {
     profileImgUrl:""
 }
 
-const reducer = (state,{field,value}) => {
-    return {
-        ...state,
-        [field] : value
-    }
-}
+const Authentication = ({register,submitBtnText,userIsLogged,...props}) => {
+    const [state,setState] = useState(initialState)
     
+    const handleChange = (e) => {
+        setState({
+            ...state,
+            [e.currentTarget.name] : e.currentTarget.value
+        })
+    }
 
-const Authentication = ({register,submitBtnText}) => {
-   const [state,dispatch] = useReducer(reducer,initialState)
-   const handleChange = (e) => {
-       dispatch({field:e.currentTarget.name,value : e.currentTarget.value})
-   }
-   const {username,email,password,profileImgUrl} = state 
-     return (
+    const returnToInitialState = () => {
+        setState(initialState)
+    }
+   
+    const handleSubmit = async (e) => {
+       e.preventDefault()
+       const url = `http://localhost:3001/api/auth/${submitBtnText}`
+       const res = await fetch(url,{
+           method : "POST",
+           headers : {
+               "Content-type" : "application/json"
+           },
+           body:JSON.stringify(state)
+       })
+       const userInfo = await res.json()
+       userIsLogged(userInfo);
+       returnToInitialState();
+       props.history.push("/")
+    } 
+   
+    const {username,email,password,profileImgUrl} = state 
+     
+    return (
         <div className="form-container">
             <div className="user_greeting">
                 {register && (
-                    <div className="user_greeting_inner">
+                    <div className="user_greeting_register">
                         <MessageRounded style={{fontSize:100,color:"#f50057"}}/>
                         <h1>Happy to have you join our family!</h1>
                     </div>
                    
                 )}
+                {!register && (
+                    <div className="user_greeting_register">
+                        <PeopleAltRounded style={{fontSize:100,color:"#f50057"}}/>
+                        <h1>Lets start chatting</h1>
+                    </div>
+                )}
             </div>
-            <form className="form"/*  onSubmit={handleSubmit} */>
+            <form className="form" onSubmit={handleSubmit}>
                 <TextField
                     name="email"
                     type="email"

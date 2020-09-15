@@ -1,8 +1,9 @@
 import React from "react";
 import NavbarItem from "./NavbarItem"
-import { SendRounded} from "@material-ui/icons"
+import { SendRounded } from "@material-ui/icons"
 
-const Navbar = (props) => {
+
+const Navbar = ({isLogged,logout}) => {
     return (
         <nav className="navbar">
             <ul className="logo">
@@ -12,8 +13,19 @@ const Navbar = (props) => {
                 <SendRounded/>
             </ul>
             <ul className="navbar-nav">
-                <NavbarItem btnText="Login"/>
-                <NavbarItem btnText="Register"/>
+                <NavbarItem btnText="Home"/>
+                {(isLogged === false) && (
+                <div style={{display:"flex"}}>
+                    <NavbarItem btnText="Login"/>
+                    <NavbarItem btnText="Register"/>
+                </div>
+                )}
+                {(isLogged === true) && (
+                    <div style={{display: "flex"}}>
+                        <NavbarItem btnText="Logout"  logout={logout}/>
+                    </div>
+                )}
+                
             </ul>
         </nav>
     )
