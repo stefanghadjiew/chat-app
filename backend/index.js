@@ -5,9 +5,12 @@ const errorHandler = require("./errorHandler");
 const authRoutes = require("./authRoutes");
 const messagesRoutes = require("./messagesRoutes");
 const { isUserAuthenticated,isUserAuthorized  } = require("./middleware/authentication");
-const cors = require("cors")
+const cors = require("cors");
+const db = require("./db");
+const Message = require("./models/Message");
 
-app.use(express.json());
+
+app.use(express.json()); 
 app.use(cors());
 
 app.use("/api/auth",authRoutes);
@@ -15,6 +18,20 @@ app.use("/api/user/:id/messages",
 isUserAuthenticated,
 isUserAuthorized,
 messagesRoutes);
+
+app.get("/api/all",isUserAuthenticated,async (req,res,next) => {
+    try {
+        let allMessages = await db.Message.find()
+        .sort({createdAt : "desc"})
+        .populate("user",{
+            username: true
+        });
+        res.status(200).json(allMessages);
+    } 
+    catch(err) {
+        return next(err)
+    }
+})
 
 app.use(errorHandler);
 

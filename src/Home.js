@@ -1,9 +1,37 @@
-import React from "react";
+import React,{ useState } from "react";
 import Button from "@material-ui/core/Button"
 import { Link } from "react-router-dom"
 
-const Home = ({isLogged}) => {
-    if (!isLogged) {
+const Home = ({isLogged,token,userId}) => {
+    const [text,setText] = useState("")
+
+    const handleChange = (e) => {
+        setText({
+            text : e.target.value 
+        })
+    }
+    
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const url = `http://localhost:3001/api/user/${userId}/messages`
+            const res = await fetch(url,{
+                method : "POST",
+                headers: {
+                    "Content-type" : "application/json",
+                    "Authorization" : `Bearer ${token}` 
+                },
+                body : JSON.stringify(text)
+            })
+            const message = await res.json()
+            console.log(message)
+            setText({text: ""})
+        } catch(err) {
+            console.log(err)
+        }
+    } 
+
+    if (isLogged === false) {
         return (
             <div className="form-container">
                 <div className="form_container_inner">
@@ -17,6 +45,30 @@ const Home = ({isLogged}) => {
                             color="secondary">START MESSAGING
                         </Button>
                     </Link>
+                </div>
+            </div>
+        )
+    }
+    if(isLogged === true) {
+        return (
+            <div className="chat_friends_container">
+                <div className="user_friends_display">
+
+                </div>
+                <div className="chat_box">
+                    <div className="message_display">
+
+                    </div>
+                    <div className="message_form_container">
+                        <form className="message_form" onSubmit={handleSubmit}>
+                            <input 
+                                type="text" 
+                                value={text.text}
+                                placeholder="Write a message..." 
+                                onChange={handleChange}
+                            />
+                        </form>
+                    </div>
                 </div>
             </div>
         )

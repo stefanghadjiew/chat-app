@@ -15,21 +15,30 @@ function App() {
     setIsUserLogged({
       user:{},
       isLogged:false,
-      err:{}
+      err:""
     })
   }
   
-  const userIsLogged = (dataFromAuth,errFromAuth) => {
+  const userIsLogged = (dataFromAuth,boolean,errFromAuth) => {
     setIsUserLogged({
       user:dataFromAuth,
-      isLogged:true,
-      err: {errFromAuth}
+      isLogged:boolean,
+      err: errFromAuth
     })
   }
   return (
     <Router>
-       <Navbar isLogged={isUserLogged.isLogged} logout={logout}/>
-       <Main isLogged={isUserLogged.isLogged} userIsLogged={userIsLogged}/>
+       <Navbar 
+       isLogged={isUserLogged.isLogged} 
+       username={isUserLogged.user.username} 
+       logout={logout}
+       userImage={isUserLogged.user.profileImgUrl}
+       />
+       <Main
+       userId = {isUserLogged.user.id}
+       token ={isUserLogged.user.token} 
+       isLogged={isUserLogged.isLogged} 
+       userIsLogged={userIsLogged}/>
     </Router>
    );
 }

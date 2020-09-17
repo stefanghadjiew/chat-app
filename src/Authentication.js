@@ -1,6 +1,7 @@
 import React , { useState } from "react";
 import TextField from "@material-ui/core/TextField"
-import { MessageRounded,PeopleAltRounded } from "@material-ui/icons"
+import { MessageRounded,PeopleAltRounded,GamesRounded,Check } from "@material-ui/icons"
+import IconButton from "@material-ui/core/IconButton"
 import Button from "@material-ui/core/Button"
 
 
@@ -8,7 +9,7 @@ const initialState = {
     username :"",
     email:"",
     password:"",
-    profileImgUrl:""
+    
 }
 
 const Authentication = ({register,submitBtnText,userIsLogged,...props}) => {
@@ -27,21 +28,27 @@ const Authentication = ({register,submitBtnText,userIsLogged,...props}) => {
    
     const handleSubmit = async (e) => {
        e.preventDefault()
-       const url = `http://localhost:3001/api/auth/${submitBtnText}`
-       const res = await fetch(url,{
-           method : "POST",
-           headers : {
-               "Content-type" : "application/json"
-           },
-           body:JSON.stringify(state)
-       })
-       const userInfo = await res.json()
-       userIsLogged(userInfo);
-       returnToInitialState();
-       props.history.push("/")
-    } 
+       
+            const url = `http://localhost:3001/api/auth/${submitBtnText}`
+            const res = await fetch(url,{
+                method : "POST",
+                headers : {
+                    "Content-type" : "application/json",
+                    },
+                body:JSON.stringify(state)
+            })
+            const userInfo = await res.json()
+            if(userInfo.err) {
+                userIsLogged({},false,userInfo.err.message)
+            } else {
+                userIsLogged(userInfo,true,"");
+                returnToInitialState();
+                props.history.push("/")
+            }
+           
+        } 
    
-    const {username,email,password,profileImgUrl} = state 
+    const {username,email,password} = state 
      
     return (
         <div className="form-container">
@@ -89,14 +96,6 @@ const Authentication = ({register,submitBtnText,userIsLogged,...props}) => {
                             variant="outlined" 
                             value={username} 
                             onChange={handleChange}
-                        />
-                        <TextField
-                            name="profileImgUrl"
-                            type="text"
-                            label="avatar" 
-                            variant="outlined" 
-                            value={profileImgUrl} 
-                            onChange={handleChange} 
                         />
                     </div>
                 )}

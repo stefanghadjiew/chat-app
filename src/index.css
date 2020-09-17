@@ -115,3 +115,46 @@ a {
   color: #fff;
 }
 
+.chat_friends_container {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  
+
+}
+
+.user_friends_display {
+  width: 30%;
+  background-color: #f50057;
+}
+
+.avatar {
+  margin: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.chat_box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.message_display {
+  width: 100%;
+  height: calc(100% - 40px - 2rem);
+}
+
+.message_form {
+  height: 40px;
+}
+
+.message_form > input {
+  width:calc(100% - 2rem) ;
+  height: 100%;
+  padding:1rem;
+  margin: 0;
+  border: 0;
+  outline: none;
+  background-color: #2d3436;
+  color: #f50057;
+}
