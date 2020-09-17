@@ -22,7 +22,7 @@ messagesRoutes);
 app.get("/api/all",isUserAuthenticated,async (req,res,next) => {
     try {
         let allMessages = await db.Message.find()
-        .sort({createdAt : "desc"})
+        .sort({createdAt : "asc"})
         .populate("user",{
             username: true
         });

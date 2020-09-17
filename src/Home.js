@@ -1,13 +1,19 @@
 import React,{ useState } from "react";
 import Button from "@material-ui/core/Button"
 import { Link } from "react-router-dom"
+import Messages from "./Messages"
+/* import Friends from "./Friends" */
 
 const Home = ({isLogged,token,userId}) => {
-    const [text,setText] = useState("")
+    const [text,setText] = useState({
+        text: "",
+    })
 
+    const [search,setSearch] = useState('');
+    
     const handleChange = (e) => {
         setText({
-            text : e.target.value 
+            text : e.target.value,
         })
     }
     
@@ -21,11 +27,12 @@ const Home = ({isLogged,token,userId}) => {
                     "Content-type" : "application/json",
                     "Authorization" : `Bearer ${token}` 
                 },
-                body : JSON.stringify(text)
+                body : JSON.stringify(search)
             })
             const message = await res.json()
             console.log(message)
             setText({text: ""})
+            setSearch('')
         } catch(err) {
             console.log(err)
         }
@@ -53,11 +60,11 @@ const Home = ({isLogged,token,userId}) => {
         return (
             <div className="chat_friends_container">
                 <div className="user_friends_display">
-
+                    {/* <Friends/> */}
                 </div>
                 <div className="chat_box">
                     <div className="message_display">
-
+                        <Messages search={search} token={token}/>
                     </div>
                     <div className="message_form_container">
                         <form className="message_form" onSubmit={handleSubmit}>
@@ -67,6 +74,7 @@ const Home = ({isLogged,token,userId}) => {
                                 placeholder="Write a message..." 
                                 onChange={handleChange}
                             />
+                            <button style={{display:"none"}}onClick={()=>setSearch(text)}></button>
                         </form>
                     </div>
                 </div>
