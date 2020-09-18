@@ -8,6 +8,7 @@ const { isUserAuthenticated,isUserAuthorized  } = require("./middleware/authenti
 const cors = require("cors");
 const db = require("./db");
 const Message = require("./models/Message");
+const friends = require("./models/UsersFriends");
 
 
 app.use(express.json()); 
@@ -30,6 +31,31 @@ app.get("/api/all",isUserAuthenticated,async (req,res,next) => {
     } 
     catch(err) {
         return next(err)
+    }
+})
+
+app.post("/api/user/:id/friends",isUserAuthenticated,isUserAuthorized,async (req,res,next) => {
+    try {
+        let friend = await friends.create({
+            friend : req.body.friend,
+            user : req.params.id
+        });
+        let user = await db.User.findById(req.params.id)
+        user.friends.push(friend.id)
+        await user.save()
+        res.status(200).json(friend);
+    } catch(err){
+        return next(err)
+    }
+   
+})
+
+app.get("/api/user/:id/friends/:friends_id", isUserAuthenticated,async (req,res,next) => {
+    try {
+        let allFriends = await db.usersFriends.find()
+        res.status(200).json(allFriends);
+    } catch (err) {
+        return next(err);
     }
 })
 
