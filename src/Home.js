@@ -74,7 +74,10 @@ const Home = ({isLogged,token,userId}) => {
                                 placeholder="Write a message..." 
                                 onChange={handleChange}
                             />
-                            <button style={{display:"none"}}onClick={()=>setSearch(text)}></button>
+                            <button 
+                                style={{display:"none"}}
+                                onClick={()=>setSearch(text)}>
+                            </button>
                         </form>
                     </div>
                 </div>

@@ -2,6 +2,7 @@ import React , { useState } from "react";
 import TextField from "@material-ui/core/TextField"
 import { MessageRounded,PeopleAltRounded,} from "@material-ui/icons"
 import Button from "@material-ui/core/Button";
+import Alert from "@material-ui/lab/Alert"
 
 
 const initialState = {
@@ -11,9 +12,14 @@ const initialState = {
     
 }
 
-const Authentication = ({register,submitBtnText,userIsLogged,...props}) => {
+
+
+const Authentication = ({register,submitBtnText,userIsLogged,history,...props}) => {
     const [state,setState] = useState(initialState)
-    
+    const [err,setErr] = useState({
+        has:false,
+        msg:""
+    })
     const handleChange = (e) => {
         setState({
             ...state,
@@ -38,17 +44,23 @@ const Authentication = ({register,submitBtnText,userIsLogged,...props}) => {
             })
             const userInfo = await res.json()
             if(userInfo.err) {
-                userIsLogged({},false,userInfo.err.message)
+                userIsLogged({},false)
+                setErr({has:true,msg:userInfo.err.message})
             } else {
-                userIsLogged(userInfo,true,"");
+                userIsLogged(userInfo,true);
                 returnToInitialState();
-                props.history.push("/")
+                history.push("/")
             }
            
         } 
+
+    history.listen(()=> {
+        setErr({has:false,msg:""})
+        setState(initialState)
+    })   
    
     const {username,email,password} = state 
-     
+    
     return (
         <div className="form-container">
             <div className="user_greeting">
@@ -67,6 +79,11 @@ const Authentication = ({register,submitBtnText,userIsLogged,...props}) => {
                 )}
             </div>
             <form className="form" onSubmit={handleSubmit}>
+                {err.has === true && (
+                    <Alert variant="filled" severity="error" style={{margin:"0.5rem"}}>
+                        {err.msg}
+                    </Alert>
+                )}
                 <TextField
                     name="email"
                     type="email"

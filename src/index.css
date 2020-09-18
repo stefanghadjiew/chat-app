@@ -21,6 +21,8 @@ a {
 }
 
 .navbar {
+  width: calc(100% - 1em - 1rem);
+  position: fixed;
   display: flex;
   justify-content: space-between;
   height: 60px;
@@ -134,18 +136,26 @@ a {
 }
 
 .chat_box {
+  
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
 .message_display {
+  margin-top: calc(60px + 1rem);
+  margin-bottom: calc(60px);
   width: 100%;
-  height: calc(100% - 40px - 2rem);
+  display: flex;
+  flex-direction: column;
 }
 
-.message_form {
-  height: 40px;
+.message_form_container {
+  height: calc(100% - 60px);
+  width: 100%;
+  position: fixed;
+  top: calc(100% - 60px + 1rem);
+
 }
 
 .message_form > input {
