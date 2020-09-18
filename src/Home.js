@@ -1,10 +1,13 @@
-import React,{ useState } from "react";
-import Button from "@material-ui/core/Button"
-import { Link } from "react-router-dom"
-import Messages from "./Messages"
+import React,{ useState,useEffect } from "react";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+import Messages from "./Messages";
+
+
 /* import Friends from "./Friends" */
 
 const Home = ({isLogged,token,userId}) => {
+   
     const [text,setText] = useState({
         text: "",
     })
@@ -62,9 +65,9 @@ const Home = ({isLogged,token,userId}) => {
                 <div className="user_friends_display">
                     {/* <Friends/> */}
                 </div>
-                <div className="chat_box">
+                <div className="chat_box" id="chat_box">
                     <div className="message_display">
-                        <Messages search={search} token={token}/>
+                        <Messages id="messages" search={search} token={token}/>
                     </div>
                     <div className="message_form_container">
                         <form className="message_form" onSubmit={handleSubmit}>

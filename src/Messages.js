@@ -1,8 +1,11 @@
 import React, { useState,useEffect } from "react";
 import Message from "./Message"
-const Messages = ({token,search}) => {
+import { animateScroll } from "react-scroll";
+const Messages = ({token,search,id}) => {
     const [messages,setMessages] = useState([]);
 
+    const scrollToBottom = () => {animateScroll.scrollToBottom({containerId:`${id}`})}
+    
     useEffect( () => {
         const fetchData = async () => {
             const url = "http://localhost:3001/api/all"
@@ -18,8 +21,10 @@ const Messages = ({token,search}) => {
             setMessages(messages);
         }
         fetchData();
-       
-    },[search]);
+        scrollToBottom();
+    },[search],);
+
+    
 
 return (
      messages.map(m => (
