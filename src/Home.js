@@ -1,12 +1,10 @@
-import React,{ useState,useEffect } from "react";
+import React,{ useState } from "react";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import Messages from "./Messages";
+import Friends from "./Friends"
 
-
-/* import Friends from "./Friends" */
-
-const Home = ({isLogged,token,userId}) => {
+const Home = ({isLogged,token,userId,populateFriends,addFriends,userFriends}) => {
    
     const [text,setText] = useState({
         text: "",
@@ -33,7 +31,6 @@ const Home = ({isLogged,token,userId}) => {
                 body : JSON.stringify(search)
             })
             const message = await res.json()
-            console.log(message)
             setText({text: ""})
             setSearch('')
         } catch(err) {
@@ -49,7 +46,7 @@ const Home = ({isLogged,token,userId}) => {
                     <h3>Welcome to the official ArrowMessage Desktop app.</h3>
                     <h3>Its fast and secure.</h3>
                     <Link to="/login">
-                        <Button
+                        <Button 
                             style={{width:"50%",height:60}}
                             variant="contained"
                             color="secondary">START MESSAGING
@@ -63,7 +60,7 @@ const Home = ({isLogged,token,userId}) => {
         return (
             <div className="chat_friends_container">
                 <div className="user_friends_display">
-                    {/* <Friends/> */}
+                    <Friends userFriends={userFriends} populateFriends={populateFriends} addFriends={addFriends} userId={userId} token={token}/>
                 </div>
                 <div className="chat_box" id="chat_box">
                     <div className="message_display">

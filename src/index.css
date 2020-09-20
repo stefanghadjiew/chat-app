@@ -54,7 +54,7 @@ a {
 
 
 .form-container {
-  height: calc(100vh - 60px);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -118,11 +118,12 @@ a {
 }
 
 .chat_friends_container {
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
   display: flex;
 }
 
 .user_friends_display {
+  margin-top: 60px;
   width: 30%;
   background-color: #f50057;
 }
@@ -134,15 +135,14 @@ a {
 }
 
 .chat_box {
-  
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
 .message_display {
-  margin-top: calc(60px + 1rem);
-  margin-bottom: calc(60px);
+  margin-top:60px;
+  margin-bottom:60px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -166,3 +166,4 @@ a {
   background-color: #2d3436;
   color: #f50057;
 }
+

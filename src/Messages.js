@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import Message from "./Message"
+import Message from "./Message";
 import { animateScroll } from "react-scroll";
 const Messages = ({token,search,id,userId}) => {
     const [messages,setMessages] = useState([]);
@@ -7,22 +7,25 @@ const Messages = ({token,search,id,userId}) => {
     const scrollToBottom = () => {animateScroll.scrollToBottom({containerId:`${id}`})}
     
     useEffect( () => {
-        const fetchData = async () => {
-            const url = "http://localhost:3001/api/all"
-            const res = await fetch(url,{
-                method : "GET",
-                headers : {
-                    "Content-type" : "application/json",
-                    "Authorization" : `Bearer ${token}`
-                }
-                })
-            const messages = await res.json()
-            console.log(messages);
-            setMessages(messages);
+        const fetchMessages = async () => {
+            try {
+                const url = "http://localhost:3001/api/all"
+                const res = await fetch(url,{
+                    method : "GET",
+                    headers : {
+                        "Content-type" : "application/json",
+                        "Authorization" : `Bearer ${token}`
+                    }
+                    })
+                const messages = await res.json()
+                setMessages(messages);
+            } catch(err) {
+                console.log(err)
+            }
         }
-        fetchData();
+        fetchMessages();
         scrollToBottom();
-    },[search],);
+    },[search]);
 
     
 
