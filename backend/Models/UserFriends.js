@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const User = require("./Users")
+const db = require('../db')
 
 const friendsSchema = new mongoose.Schema({
     user : {
@@ -14,7 +14,7 @@ const friendsSchema = new mongoose.Schema({
 
 friendsSchema.pre("remove",async function(next) {
     try {
-        let user = await User.findById(this.user)
+        let user = await db.User.findById(this.user)
         user.friends.remove(this.id)
         await user.save()
     } catch(err) {
@@ -22,5 +22,5 @@ friendsSchema.pre("remove",async function(next) {
     }
 })
 
-const friends = mongoose.model("friends",friendsSchema);
-module.exports = friends;
+const UserFriends = mongoose.model("UserFriends",friendsSchema);
+module.exports = UserFriends;

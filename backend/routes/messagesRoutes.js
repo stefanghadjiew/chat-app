@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router({mergeParams:true});
-const {createMessages,getMessages,deleteMessages } = require("./middleware/messages");
+const {createMessages,getMessages,deleteMessages } = require("../middleware/messages");
 
 
 router.post("/",createMessages);

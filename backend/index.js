@@ -2,13 +2,12 @@ const express = require("express");
 const app = express();
 const PORT = 3001;
 const errorHandler = require("./errorHandler");
-const authRoutes = require("./authRoutes");
-const messagesRoutes = require("./messagesRoutes");
-const { isUserAuthenticated,isUserAuthorized  } = require("./middleware/authentication");
+const authRoutes = require("./routes/authRoutes");
+const messagesRoutes = require("./routes/messagesRoutes");
+const friendsRoutes = require('./routes/friendsRoutes');
 const cors = require("cors");
 const db = require("./db");
-const Message = require("./models/Message");
-const friends = require("./models/UsersFriends");
+const { isUserAuthenticated,isUserAuthorized } = require("./middleware/authentication")
 
 
 app.use(express.json()); 
@@ -19,6 +18,11 @@ app.use("/api/user/:id/messages",
 isUserAuthenticated,
 isUserAuthorized,
 messagesRoutes);
+
+app.use("/api/user/:id/friends",
+isUserAuthenticated,
+isUserAuthorized,
+friendsRoutes)
 
 app.get("/api/all",isUserAuthenticated,async (req,res,next) => {
     try {
@@ -34,30 +38,6 @@ app.get("/api/all",isUserAuthenticated,async (req,res,next) => {
     }
 })
 
-app.post("/api/user/:id/friends",isUserAuthenticated,isUserAuthorized,async (req,res,next) => {
-    try {
-        let friend = await friends.create({
-            friend : req.body.friend,
-            user : req.params.id
-        });
-        let user = await db.User.findById(req.params.id)
-        user.friends.push(friend.id)
-        await user.save()
-        res.status(200).json(friend);
-    } catch(err){
-        return next(err)
-    }
-   
-})
-
-app.get("/api/user/:id/friends/:friends_id", isUserAuthenticated,async (req,res,next) => {
-    try {
-        let allFriends = await db.usersFriends.find()
-        res.status(200).json(allFriends);
-    } catch (err) {
-        return next(err);
-    }
-})
 
 app.use(errorHandler);
 

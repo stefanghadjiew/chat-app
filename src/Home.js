@@ -67,7 +67,7 @@ const Home = ({isLogged,token,userId}) => {
                 </div>
                 <div className="chat_box" id="chat_box">
                     <div className="message_display">
-                        <Messages id="messages" search={search} token={token}/>
+                        <Messages userId={userId} id="messages" search={search} token={token}/>
                     </div>
                     <div className="message_form_container">
                         <form className="message_form" onSubmit={handleSubmit}>

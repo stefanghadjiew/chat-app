@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import Message from "./Message"
 import { animateScroll } from "react-scroll";
-const Messages = ({token,search,id}) => {
+const Messages = ({token,search,id,userId}) => {
     const [messages,setMessages] = useState([]);
 
     const scrollToBottom = () => {animateScroll.scrollToBottom({containerId:`${id}`})}
@@ -28,10 +28,11 @@ const Messages = ({token,search,id}) => {
 
 return (
      messages.map(m => (
-        <Message 
+        <Message
+        userId={userId} 
         key={m._id}
         text={m.text}
-        messageId={m.id}
+        messageId={m.user._id}
         userName = {m.user.username}
     />
 ))     

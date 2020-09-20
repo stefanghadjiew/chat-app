@@ -3,7 +3,7 @@ import { Switch,Route } from "react-router-dom";
 import Home from "./Home" 
 import Authentication from "./Authentication"
 
-const Main = ({isLogged,userIsLogged,token,userId,}) => {
+const Main = ({isLogged,userIsLogged,token,userId}) => {
     return(
         <Switch>
         <Route exact path="/" render={props => <Home token={token} userId={userId} isLogged={isLogged} {...props}/>}/>

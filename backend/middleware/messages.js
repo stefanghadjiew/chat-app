@@ -1,6 +1,5 @@
 const db = require("../db");
-const Message = require("../models/Message");
-const User = require("../models/Users");
+
 //prefix will be - api/user/:id/messages
 
 exports.createMessages = async (req,res,next) => {

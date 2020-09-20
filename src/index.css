@@ -120,8 +120,6 @@ a {
 .chat_friends_container {
   min-height: 100vh;
   display: flex;
-  
-
 }
 
 .user_friends_display {
