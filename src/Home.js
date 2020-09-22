@@ -21,7 +21,7 @@ const Home = ({isLogged,token,userId,populateFriends,addFriends,userFriends}) =>
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const url = `http://localhost:3001/api/user/${userId}/messages`
+            const url = `api/user/${userId}/messages`
             const res = await fetch(url,{
                 method : "POST",
                 headers: {

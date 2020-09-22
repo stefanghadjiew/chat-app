@@ -10,7 +10,7 @@ const Friends = ({userId,token,populateFriends,addFriends,userFriends}) => {
     useEffect(() => {  
         const fetchFriends = async () => {
             try{
-                const url = `http://localhost:3001/api/user/${userId}/friends`
+                const url = `api/user/${userId}/friends`
                 const res = await fetch(url,{
                     method: "GET",
                     headers: {

@@ -34,7 +34,7 @@ const Authentication = ({register,submitBtnText,userIsLogged,history,...props}) 
     const handleSubmit = async (e) => {
        e.preventDefault()
        
-            const url = `http://localhost:3001/api/auth/${submitBtnText}`
+            const url = `api/auth/${submitBtnText}`
             const res = await fetch(url,{
                 method : "POST",
                 headers : {

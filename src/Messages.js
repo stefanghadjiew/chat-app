@@ -9,7 +9,7 @@ const Messages = ({token,search,id,userId}) => {
     useEffect( () => {
         const fetchMessages = async () => {
             try {
-                const url = "http://localhost:3001/api/all"
+                const url = "api/all"
                 const res = await fetch(url,{
                     method : "GET",
                     headers : {

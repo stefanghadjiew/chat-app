@@ -35,7 +35,7 @@ const Navbar = ({isLogged,logout,username,userId,token,addFriends}) => {
     const postFriend = async (e) => {
         e.preventDefault()
         try {
-            const url = `http://localhost:3001/api/user/${userId}/friends`
+            const url = `api/user/${userId}/friends`
             const res = await fetch(url,{
                 method: "POST",
                 headers: {
