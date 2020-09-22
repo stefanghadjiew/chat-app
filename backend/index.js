@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const errorHandler = require("./errorHandler");
 const authRoutes = require("./routes/authRoutes");
 const messagesRoutes = require("./routes/messagesRoutes");
 const friendsRoutes = require('./routes/friendsRoutes');
 const cors = require("cors");
 const db = require("./db");
-const { isUserAuthenticated,isUserAuthorized } = require("./middleware/authentication")
+const { isUserAuthenticated,isUserAuthorized } = require("./middleware/authentication");
 
 
 app.use(express.json()); 

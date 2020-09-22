@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb+srv://cheffo0o:123smokeweed123@cluster0.qus4z.mongodb.net/chat-app?retryWrites=true&w=majority",{
+mongoose.connect(process.env.MONGODB_URI,{
         useNewUrlParser: true ,
         useUnifiedTopology: true , 
         useCreateIndex : true 
@@ -8,4 +8,4 @@ mongoose.connect("mongodb+srv://cheffo0o:123smokeweed123@cluster0.qus4z.mongodb.
 
 module.exports.User = require("./models/Users");
 module.exports.Message = require("./models/Message");
-module.exports.UserFriends = require("./models/UserFriends")
+module.exports.UserFriends = require("./models/UserFriends");
