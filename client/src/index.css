@@ -118,7 +118,7 @@ a {
 }
 
 .chat_friends_container {
-  min-height: calc(100vh - 60px);
+  min-height: 100vh;
   display: flex;
 }
 
