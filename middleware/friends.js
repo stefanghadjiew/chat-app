@@ -1,10 +1,19 @@
 const db = require('../db')
 
 
+
+
 exports.getFriends = async (req,res,next) => {
+   
     try {
         let allFriends = await db.UserFriends.find()
-        res.status(200).json(allFriends);
+        
+        let userFriends = allFriends.filter(f => f.user == req.params.id )
+           
+        console.log(userFriends)
+        
+        
+        res.status(200).json(userFriends);
     } catch (err) {
         return next(err);
     }

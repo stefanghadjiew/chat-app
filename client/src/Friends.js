@@ -28,7 +28,7 @@ const Friends = ({userId,token,populateFriends,addFriends,userFriends}) => {
             }
         }
         fetchFriends();
-    },[addFriends]);
+    },/* [addFriends] */[]);
 
 
    return (
