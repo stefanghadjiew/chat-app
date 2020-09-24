@@ -3,13 +3,13 @@ import Message from "./Message";
 import { animateScroll } from "react-scroll";
 const Messages = ({token,search,id,userId}) => {
     const [messages,setMessages] = useState([]);
-
+    const MongoAtlas = "http://localhost:3001/"
     const scrollToBottom = () => {animateScroll.scrollToBottom({containerId:`${id}`})}
     
     useEffect( () => {
         const fetchMessages = async () => {
             try {
-                const url = "api/all"
+                const url = `${MongoAtlas}api/all`
                 const res = await fetch(url,{
                     method : "GET",
                     headers : {

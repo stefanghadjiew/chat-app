@@ -5,7 +5,7 @@ import Messages from "./Messages";
 import Friends from "./Friends"
 
 const Home = ({isLogged,token,userId,populateFriends,addFriends,userFriends}) => {
-   
+   const MongoAtlas = "http://localhost:3001/"
     const [text,setText] = useState({
         text: "",
     })
@@ -21,7 +21,7 @@ const Home = ({isLogged,token,userId,populateFriends,addFriends,userFriends}) =>
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const url = `api/user/${userId}/messages`
+            const url = `${MongoAtlas}api/user/${userId}/messages`
             const res = await fetch(url,{
                 method : "POST",
                 headers: {

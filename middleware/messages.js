@@ -12,8 +12,7 @@ exports.createMessages = async (req,res,next) => {
         user.messages.push(message.id)
         await user.save()
         let foundMessage = await db.Message.findById(message.id).populate("user",{
-            username : true,
-            profileImgUrl:true
+            username : true
         })
         res.status(200).json(foundMessage)
     } catch(err) {
@@ -28,7 +27,7 @@ exports.getMessages = async (req,res,next) => {
         let foundMessage = await db.Message.findById(req.params.messages_id)
         res.status(200).json(foundMessage)
     } catch(err) {
-
+        return next(err)
     }
 }
 

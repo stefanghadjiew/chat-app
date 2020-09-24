@@ -9,6 +9,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import TextField from "@material-ui/core/TextField";
 
 const Navbar = ({isLogged,logout,username,userId,token,addFriends}) => {
+    const MongoAtlas = "http://localhost:3001/"
     const [open,setOpen] = useState(false)
     const handleClose = () => {
         setOpen(false)
@@ -35,7 +36,7 @@ const Navbar = ({isLogged,logout,username,userId,token,addFriends}) => {
     const postFriend = async (e) => {
         e.preventDefault()
         try {
-            const url = `api/user/${userId}/friends`
+            const url = `${MongoAtlas}api/user/${userId}/friends`
             const res = await fetch(url,{
                 method: "POST",
                 headers: {

@@ -2,6 +2,7 @@ import React,{ useState , useEffect } from "react";
 import Friend from "./Friend"
 
 const Friends = ({userId,token,populateFriends,addFriends,userFriends}) => {
+    const MongoAtlas = "http://localhost:3001/"
     const [err,setErr] = useState({
         has: false,
         msg: ""
@@ -10,7 +11,7 @@ const Friends = ({userId,token,populateFriends,addFriends,userFriends}) => {
     useEffect(() => {  
         const fetchFriends = async () => {
             try{
-                const url = `api/user/${userId}/friends`
+                const url = `${MongoAtlas}api/user/${userId}/friends`
                 const res = await fetch(url,{
                     method: "GET",
                     headers: {
@@ -27,7 +28,7 @@ const Friends = ({userId,token,populateFriends,addFriends,userFriends}) => {
             }
         }
         fetchFriends();
-    },[]);
+    },[addFriends]);
 
 
    return (
@@ -35,6 +36,7 @@ const Friends = ({userId,token,populateFriends,addFriends,userFriends}) => {
             <Friend
             key = {f._id}
             name = {f.friend}
+            id = {f._id}
             />
         ))
     )
