@@ -37,12 +37,12 @@ app.get("/api/all",isUserAuthenticated,async (req,res,next) => {
         return next(err)
     }
 })
-/* 
-app.use(express.static('client/build'));
+
+/* app.use(express.static('client/build'));
 app.get('*', (req,res) => {
     res.sendFile(path.resolve(__dirname,'client','build','index.html'))
-})
- */
+}) */
+ 
 app.use(errorHandler);
 
 

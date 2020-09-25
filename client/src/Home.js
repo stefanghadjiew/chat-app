@@ -5,7 +5,7 @@ import Messages from "./Messages";
 
 
 const Home = ({ isLogged,token,userId }) => {
-   const MongoAtlas = "http://localhost:3001/"
+    const MongoAtlas = "http://localhost:3001/"
     const [text,setText] = useState({
         text: "",
     })
@@ -45,7 +45,7 @@ const Home = ({ isLogged,token,userId }) => {
                     <h3>Welcome to the official ArrowMessage Desktop app.</h3>
                     <h3>Its fast and secure.</h3>
                     <Link to="/login">
-                        <Button 
+                        <Button
                             style={{width:"50%",height:60}}
                             variant="contained"
                             color="secondary">START MESSAGING

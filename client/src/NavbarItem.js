@@ -11,9 +11,9 @@ const NavbarItem = ({btnText,logout}) => {
         return (
             <li className="navbar-nav-item">
                 <Link to="/login">
-                    <Tooltip title={btnText}>
+                    <Tooltip title={btnText} >
                         <IconButton color="secondary">
-                            <VpnKeyRounded color="secondary"/>
+                            <VpnKeyRounded className="navbar_icon_btn" color="secondary"/>
                         </IconButton>
                     </Tooltip>
                 </Link>
@@ -24,9 +24,9 @@ const NavbarItem = ({btnText,logout}) => {
         return (
             <li className="navbar-nav-item">
                 <Link to="/register">
-                    <Tooltip title={btnText}>
+                    <Tooltip title={btnText} >
                         <IconButton color="secondary">
-                            <LockOpenRounded color="secondary"/>
+                            <LockOpenRounded className="navbar_icon_btn" color="secondary"/>
                         </IconButton>
                     </Tooltip>
                 </Link>
@@ -37,9 +37,9 @@ const NavbarItem = ({btnText,logout}) => {
         return (
             <li className="navbar-nav-item">
                 <Link to="/">
-                    <Tooltip title={btnText}>
+                    <Tooltip title={btnText} >
                         <IconButton color="secondary">
-                            <HomeRounded color="secondary"/>
+                            <HomeRounded className="navbar_icon_btn" color="secondary"/>
                         </IconButton>
                     </Tooltip>
                 </Link>
@@ -49,9 +49,9 @@ const NavbarItem = ({btnText,logout}) => {
     if (btnText === "Logout") {
         return (
             <li className="navbar-nav-item">
-                <Tooltip title={btnText}>
+                <Tooltip title={btnText} >
                     <IconButton color="secondary" onClick={logout}>
-                        <ClearRounded color="secondary"/>
+                        <ClearRounded className="navbar_icon_btn" color="secondary"/>
                     </IconButton>
                 </Tooltip>
             </li>

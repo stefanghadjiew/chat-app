@@ -8,25 +8,27 @@ const Navbar = ({isLogged,logout,username}) => {
     return (
         <nav className="navbar">
             <ul className="logo">
-                <SendRounded/>
-                <SendRounded/>
+                <SendRounded className="navbar_icon_btn"/>
+                <SendRounded className="navbar_icon_btn"/>
                 ArrowMessage
-                <SendRounded/>
+                <SendRounded className="navbar_icon_btn"/>
+            </ul>
                 {(isLogged === true) &&(
                     <div className="avatar">
                         <Avatar 
-                        alt={username} 
+                        alt={username}
+                        className="avatar-icon"
                         style={{margin:"1rem",backgroundColor:"#f50057",color:"#2d3436"}}/>
                         {username}
                     </div>
                 )}
-            </ul>
+           
             <ul className="navbar-nav">
-                <NavbarItem btnText="Home"/>
+                <NavbarItem  btnText="Home"/>
                 {(isLogged === false) && (
                 <div style={{display:"flex"}}>
-                    <NavbarItem btnText="Login"/>
-                    <NavbarItem btnText="Register"/>
+                    <NavbarItem  btnText="Login"/>
+                    <NavbarItem  btnText="Register"/>
                 </div>
                 )}
                 {(isLogged === true) && (
