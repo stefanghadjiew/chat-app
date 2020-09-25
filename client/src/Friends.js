@@ -1,8 +1,9 @@
 import React,{ useState , useEffect } from "react";
 import Friend from "./Friend"
 
-const Friends = ({userId,token,populateFriends,addFriends,userFriends}) => {
-    const MongoAtlas = "http://localhost:3001/"
+const Friends = ({userId,token,populateFriends,userFriends}) => {
+  const MongoAtlas = "http://localhost:3001/"
+    
     const [err,setErr] = useState({
         has: false,
         msg: ""
@@ -20,6 +21,7 @@ const Friends = ({userId,token,populateFriends,addFriends,userFriends}) => {
                 })
                 const friends = await res.json()
                 populateFriends(friends);
+                
             } catch(err){
                 setErr({
                     has:true,
@@ -28,7 +30,7 @@ const Friends = ({userId,token,populateFriends,addFriends,userFriends}) => {
             }
         }
         fetchFriends();
-    },/* [addFriends] */[]);
+    },[] );
 
 
    return (

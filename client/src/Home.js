@@ -2,9 +2,9 @@ import React,{ useState } from "react";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import Messages from "./Messages";
-import Friends from "./Friends"
 
-const Home = ({isLogged,token,userId,populateFriends,addFriends,userFriends}) => {
+
+const Home = ({ isLogged,token,userId }) => {
    const MongoAtlas = "http://localhost:3001/"
     const [text,setText] = useState({
         text: "",
@@ -30,7 +30,6 @@ const Home = ({isLogged,token,userId,populateFriends,addFriends,userFriends}) =>
                 },
                 body : JSON.stringify(search)
             })
-            const message = await res.json()
             setText({text: ""})
             setSearch('')
         } catch(err) {
@@ -59,9 +58,6 @@ const Home = ({isLogged,token,userId,populateFriends,addFriends,userFriends}) =>
     if(isLogged === true) {
         return (
             <div className="chat_friends_container">
-                <div className="user_friends_display">
-                    <Friends userFriends={userFriends} populateFriends={populateFriends} addFriends={addFriends} userId={userId} token={token}/>
-                </div>
                 <div className="chat_box" id="chat_box">
                     <div className="message_display">
                         <Messages userId={userId} id="messages" search={search} token={token}/>
