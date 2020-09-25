@@ -129,6 +129,7 @@ a {
 }
 
 .avatar {
+  color: #f50057;
   margin: 2rem;
   display: flex;
   align-items: center;
