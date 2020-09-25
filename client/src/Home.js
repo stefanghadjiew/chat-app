@@ -5,7 +5,7 @@ import Messages from "./Messages";
 
 
 const Home = ({ isLogged,token,userId }) => {
-    const MongoAtlas = "http://localhost:3001/"
+    /* const MongoAtlas = "http://localhost:3001/" */
     const [text,setText] = useState({
         text: "",
     })
@@ -21,7 +21,7 @@ const Home = ({ isLogged,token,userId }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const url = `${MongoAtlas}api/user/${userId}/messages`
+            const url = `api/user/${userId}/messages`
             const res = await fetch(url,{
                 method : "POST",
                 headers: {
