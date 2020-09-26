@@ -2,7 +2,7 @@ import React from "react";
 
 const Message = ({text,userName,messageId,userId}) => {
     return (
-        <div style={{margin:"1rem",display: "inline-block"}}>
+        <div style={{margin:"1rem",display: "flex",width:"fit-content"}}>
             {(messageId === userId) && (
                  <span style={{backgroundColor:"#f50057",color:" #2d3436",borderRadius:"5px",padding:"0.7rem"}}>  
                  {userName} - {text} 
