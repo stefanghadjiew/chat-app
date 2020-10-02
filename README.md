@@ -1,3 +1,1 @@
-First attempt of creating a chat application.It is work in progress,but the main goal is for me and couple of my friends to use it instead of Telegram :).The functionality
-is almost identical to my ToWatchApp but i really want to practice user auth and data connection on the backend(NodeJs+MongoDB) and data flow and state in react.The main difference is that im going all functional components and hooks this time.Also using Material UI.
-So... the app has user authentication and authorization.I use 3 different documents stored in Mongo - user,messages and friends.Functionally i still have to pass argument to  useEffect so that it updates when user adds a new friend and i would like to also create a new chat window for every friend when the user click on them.Currently working on that part
+Same as the e-commerce website for watches project.Separated client from API so i can host frontend on gh-pages and API on heroku.The db is Mongo Atlas.
